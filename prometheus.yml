@@ -13,7 +13,7 @@ alerting:
 
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
-  # - "first_rules.yml"
+    - "prometheus.rules.yml"
   # - "second_rules.yml"
 
 # A scrape configuration containing exactly one endpoint to scrape:
@@ -29,3 +29,9 @@ scrape_configs:
       - targets: 
         - "localhost:9090"
         - "10.250.2.2:9100"
+    
+  - job_name: "AWS"
+    metrics_path: "/actuator/prometheus"
+    static_config:
+      - targets:
+        - "hello-springrest-dev.eu-west-1.elasticbeanstalk.com:80"
